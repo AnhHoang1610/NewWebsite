@@ -1,0 +1,66 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: cursive;
+}
+
+body{
+    background: url('bak.jpg');
+}
+
+.background,#yesform{
+    background: rgb(0, 0, 0);/*đặt đường dẫn ảnh nền trong url('') thay rgb() */
+    width: 70%;
+    height: 500px;
+    position: absolute;
+    left: 15%;
+    text-align: center;
+    justify-content: center;
+    top: 50px;
+}
+
+.background{
+    background: url('back2.jpg');
+}
+
+#yesform{
+    display: none;
+}
+
+#yesform.active{
+    display: block;
+}
+
+#yesform > h2{
+    position: relative;
+    top: 10%;
+    font-size: 110px;
+}
+
+h2{
+    font-size: 4rem;
+    color: rgb(255, 0, 195);
+    margin: 10% 0;
+}
+
+button{
+    font-size: 30px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
+    background: rgba(56, 57, 57, 0.832);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    position: absolute;
+    bottom: 20%;
+}
+
+#yes{
+    left: 30%;
+}
+
+#no{
+    right: 30%;
+}
+

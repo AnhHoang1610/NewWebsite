@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Scroll</title>
+    <style>
+        main {
+            width: 90%;
+        }
+
+        .menu-wrapper {
+            position: fixed;
+            background: rgb(127, 5, 5);
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9;
+        }
+
+        .menu-scroll {
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .menu-list {
+            display: flex;
+            justify-content: flex-start;
+            color: white;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-item {
+            font-size: 1.6em;
+            margin: 0 3%;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+        }
+
+        .menu-item:hover {
+            color: #FF9933;
+        }
+
+        .menu-categories {
+            width: 100%;
+            margin-top: 70px; /* Khoảng cách từ thanh menu cố định */
+        }
+
+        .menu-category {
+            padding-top: 70px; /* Khoảng trống phía trên */
+            width: 100%;
+            scroll-margin-top: 70px; /* Đảm bảo đúng vị trí khi cuộn */
+        }
+
+        .menu-item-card {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding-bottom: 15px;
+            border-radius: 10px;
+            flex: 1 1 300px;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .menu-item-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .item-details {
+            margin-top: 10px;
+        }
+
+        .sub-h2 {
+            font-size: 2.5em;
+        }
+
+        .menu-item.active {
+            color: #f3af42;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-wrapper">
+        <div class="menu-scroll">
+            <ul class="menu-list">
+                <a class="menu-item active" href="#menu-1">Ưu đãi</a>
+                <a class="menu-item" href="#menu-2">Combo 3 người</a>
+                <a class="menu-item" href="#menu-3">Combo 1 người</a>
+                <a class="menu-item" href="#menu-4">Combo hot</a>
+                <a class="menu-item" href="#menu-5">Đồ uống</a>
+                <a class="menu-item" href="#menu-6">Đồ ăn kèm</a>
+                <a class="menu-item" href="#menu-7">Tráng miệng</a>
+            </ul>
+        </div>
+    </div>
+    <main>
+        <!-- Các phần nội dung -->
+
+        <section class="menu-categories">
+            <h2 class="sub-h2">Ưu đãi</h2>
+            <div id="menu-1" class="menu-category">
+
+                <div class="menu-item-card">
+                    <img src="img/demo.png" alt="Món 1">
+                    <div class="item-details">
+                        <p>Thông tin món 1</p>
+                        <p>Giá: 100,000 VNĐ</p>
+                        <button class="btn-add" onclick="incrementLabel()">Thêm</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="menu-categories"></section>
+            <h2 class="sub-h2">Ưu đãi</h2>
+            <div id="menu-2" class="menu-category">
+
+                <div class="menu-item-card">
+                    <img src="img/demo.png" alt="Món 1">
+                    <div class="item-details">
+                        <p>Thông tin món 1</p>
+                        <p>Giá: 100,000 VNĐ</p>
+                        <button class="btn-add" onclick="incrementLabel()">Thêm</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="menu-categories"></section>
+            <h2 class="sub-h2">Ưu đãi</h2>
+            <div id="menu-3" class="menu-category">
+
+                <div class="menu-item-card">
+                    <img src="img/demo.png" alt="Món 1">
+                    <div class="item-details">
+                        <p>Thông tin món 1</p>
+                        <p>Giá: 100,000 VNĐ</p>
+                        <button class="btn-add" onclick="incrementLabel()">Thêm</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const menuItems = document.querySelectorAll('.menu-item');
+            const sections = document.querySelectorAll('.menu-category');
+
+            function updateActiveMenu() {
+                let current = "";
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - document.querySelector('.menu-wrapper').offsetHeight - 200;
+                    if (window.scrollY >= sectionTop && window.scrollY < sectionTop + section.offsetHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                menuItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href').substring(1) === current) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateActiveMenu);
+
+            menuItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                });
+            });
+
+            updateActiveMenu();
+        });
+
+        function incrementLabel() {
+            alert("Món đã được thêm!");
+        }
+    </script>
+</body>
+</html>
